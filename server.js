@@ -1,10 +1,12 @@
 const http = require("node:http");
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const { existsSync } = require("node:fs");
 
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
-const VAULT = process.env.OBSIDIAN_VAULT || path.join(ROOT, "data");
+const LEGACY_VAULT = "D:\\AFIF\\Diary\\Secret Diary";
+const VAULT = process.env.OBSIDIAN_VAULT || (existsSync(LEGACY_VAULT) ? LEGACY_VAULT : path.join(ROOT, "data"));
 const DATA_DIR = path.join(VAULT, "Dashboard");
 const FILES = { tasks: "tasks.md", deadlines: "deadlines.md", schedule: "schedule.md", interests: "interests.md" };
 const BACKGROUND_DIR = path.join(ROOT, "backgrounds");

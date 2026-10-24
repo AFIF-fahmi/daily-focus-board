@@ -15,7 +15,7 @@ npm start
 
 Buka <http://localhost:3000> setelah server berjalan.
 
-Secara default, server menggunakan folder `data` di proyek ini dan akan membuat file Markdown yang diperlukan secara otomatis. Agar terhubung ke vault Obsidian, atur `OBSIDIAN_VAULT`. Karena proyek ini tidak memakai package tambahan untuk membaca `.env`, variabel lingkungan dapat diatur langsung dari terminal:
+Secara default, server akan memakai vault lama `D:\AFIF\Diary\Secret Diary` jika folder tersebut tersedia. Jika tidak, server menggunakan folder `data` di proyek ini dan membuat file Markdown yang diperlukan secara otomatis. Untuk lokasi vault lain, atur `OBSIDIAN_VAULT`. Karena proyek ini tidak memakai package tambahan untuk membaca `.env`, variabel lingkungan dapat diatur langsung dari terminal:
 
 ```powershell
 $env:OBSIDIAN_VAULT = 'D:\path\ke\vault'
