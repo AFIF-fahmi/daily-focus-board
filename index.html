@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily Focus Board</title>
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/freeform.css">
+</head>
+<body>
+  <header>
+    <div>
+      <div id="clock">00:00</div>
+      <div id="date"></div>
+    </div>
+    <div id="minimizedWindows" aria-label="Panel yang diminimalkan"></div>
+    <div id="greet">Selamat datang, Arctic<small>Pelan-pelan, yang penting bergerak.</small></div>
+  </header>
+
+  <main id="workspace">
+    <section class="card window-card" data-window="tasks">
+      <h2>Fokus hari ini</h2>
+      <div class="section-note">Satu langkah kecil tetap sebuah kemajuan.</div>
+      <div class="progress"><i id="taskBar"></i></div>
+      <div class="scroll" id="tasks"></div>
+    </section>
+    <section class="card window-card" data-window="deadlines">
+      <h2>Deadline</h2>
+      <div class="scroll" id="deadlines"></div>
+    </section>
+
+    <section class="card window-card schedule-card" data-window="schedule">
+    <h2>Jadwal Kuliah</h2>
+    <div class="scroll" id="schedule"></div>
+    </section>
+
+    <section class="card window-card" data-window="interests">
+      <h2>Interest (Hobby & Project)</h2>
+      <div class="scroll" id="interests"></div>
+    </section>
+    <section class="card window-card pomo-card" id="pomo" data-window="pomo">
+      <div class="pomo-heading">
+        <h2>Pomodoro</h2>
+      </div>
+      <div id="pomoBody">
+        <div id="pomoMode">Fokus</div>
+        <div id="pomoTime">25:00</div>
+        <div class="btns">
+          <button id="pStart" type="button">Mulai</button>
+          <button id="pReset" type="button">Reset</button>
+          <button id="pSkip" type="button">Lewati</button>
+        </div>
+        <div class="pomo-note">Fokus penuh. Notifikasi nanti.</div>
+      </div>
+    </section>
+  </main>
+  <div id="backgroundLayer" aria-hidden="true"></div>
+  <section id="backgroundPanel" class="background-panel" aria-label="Pilih background" aria-hidden="true">
+    <div class="background-panel-head">
+      <strong>Background</strong>
+      <button id="backgroundClose" type="button" aria-label="Tutup panel background">×</button>
+    </div>
+    <div id="backgroundItems" class="background-items"></div>
+    <div class="background-actions">
+      <button id="backgroundPrev" type="button">‹</button>
+      <button id="backgroundAuto" type="button" aria-pressed="false">Auto foto</button>
+      <button id="backgroundNext" type="button">›</button>
+    </div>
+    <small id="backgroundHint">Taruh gambar atau video di folder backgrounds.</small>
+  </section>
+  <div id="bottomControls" aria-label="Kontrol dashboard">
+    <button id="backgroundToggle" class="background-toggle" type="button" aria-label="Buka pilihan background" title="Background"><i class="fa-solid fa-image" aria-hidden="true"></i></button>
+    <button id="pageRefresh" class="page-refresh" type="button" aria-label="Refresh halaman" title="Refresh halaman"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i></button>
+    <button id="wallpaperMode" class="wallpaper-mode" type="button" aria-label="Buka pengaturan tampilan" title="Pengaturan tampilan"><i class="fa-solid fa-sun" aria-hidden="true"></i></button>
+    <button id="interactionLock" class="lock-button" type="button" aria-pressed="false" aria-label="Kunci interaksi" title="Kunci semua interaksi">
+      <i class="fa-solid fa-lock" aria-hidden="true"></i>
+    </button>
+  </div>
+  <section id="opacityPanel" class="opacity-panel" aria-label="Pengaturan tampilan" aria-hidden="true">
+    <div class="background-panel-head">
+      <strong>Tampilan</strong>
+      <button id="opacityClose" type="button" aria-label="Tutup panel tampilan">×</button>
+    </div>
+    <div class="opacity-mode">
+      <button type="button" data-wallpaper-mode="normal">Normal</button>
+      <button type="button" data-wallpaper-mode="semi">Semi</button>
+      <button type="button" data-wallpaper-mode="full">Full</button>
+    </div>
+    <button id="resetLayout" class="layout-reset" type="button">Reset layout</button>
+    <label>Window <output id="windowOpacityValue">100%</output><input id="windowOpacity" type="range" min="0" max="100" value="100"></label>
+    <label>Greeting <output id="greetingOpacityValue">100%</output><input id="greetingOpacity" type="range" min="0" max="100" value="100"></label>
+    <label>Control <output id="controlOpacityValue">100%</output><input id="controlOpacity" type="range" min="0" max="100" value="100"></label>
+    <label>Blur <output id="windowBlurValue">18px</output><input id="windowBlur" type="range" min="0" max="40" value="18"></label>
+    <div class="color-settings">
+      <div class="color-row">
+        <span>Warna window</span><input id="windowColor" type="color" value="#111930">
+        <span>Warna accent</span><input id="accentColor" type="color" value="#75d9ff">
+      </div>
+      <div class="color-actions">
+        <button id="resetColors" type="button">Reset warna</button>
+        <button id="autoColors" type="button">Warna otomatis</button>
+      </div>
+    </div>
+  </section>
+  <div id="connectionStatus" aria-live="polite">
+    <span class="status-ping" aria-hidden="true"></span>
+    <span class="status-label">Fetching...</span>
+  </div>
+
+  <script src="js/windows.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

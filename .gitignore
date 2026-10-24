@@ -1,0 +1,15 @@
+# Local configuration and user data
+.env
+.env.*
+!.env.example
+data/*
+!data/.gitkeep
+
+# Dependencies and generated output
+node_modules/
+npm-debug.log*
+
+# Operating-system/editor files
+.DS_Store
+Thumbs.db
+.vscode/
