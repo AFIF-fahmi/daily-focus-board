@@ -423,7 +423,8 @@ body.wallpaper-semi header { opacity: var(--greeting-opacity); }
 body.wallpaper-semi #connectionStatus { opacity: var(--window-opacity); }
 body.wallpaper-semi .lock-button,
 body.wallpaper-semi #wallpaperMode,
-body.wallpaper-semi #backgroundToggle { opacity: var(--control-opacity); }
+body.wallpaper-semi #backgroundToggle,
+body.wallpaper-semi #pageRefresh { opacity: var(--control-opacity); }
 
 body.wallpaper-full #workspace .window-card,
 body.wallpaper-full #minimizedWindows,
@@ -504,22 +505,26 @@ body.wallpaper-full header { opacity: var(--greeting-opacity); }
 body.wallpaper-full #connectionStatus { opacity: var(--window-opacity); }
 body.wallpaper-full .lock-button,
 body.wallpaper-full #wallpaperMode,
-body.wallpaper-full #backgroundToggle { opacity: var(--control-opacity); }
+body.wallpaper-full #backgroundToggle,
+body.wallpaper-full #pageRefresh { opacity: var(--control-opacity); }
 
 body:not(.wallpaper-full) #workspace .window-card { opacity: var(--window-opacity); }
 body:not(.wallpaper-full) #connectionStatus { opacity: var(--window-opacity); }
 body:not(.wallpaper-full) header { opacity: var(--greeting-opacity); }
 body:not(.wallpaper-full) #interactionLock,
 body:not(.wallpaper-full) #wallpaperMode,
-body:not(.wallpaper-full) #backgroundToggle { opacity: calc(.5 * var(--control-opacity)); }
+body:not(.wallpaper-full) #backgroundToggle,
+body:not(.wallpaper-full) #pageRefresh { opacity: calc(.5 * var(--control-opacity)); }
 
 body:not(.wallpaper-full) #interactionLock:hover,
 body:not(.wallpaper-full) #interactionLock:focus-visible,
 body:not(.wallpaper-full) #wallpaperMode:hover,
 body:not(.wallpaper-full) #wallpaperMode:focus-visible,
 body:not(.wallpaper-full) #backgroundToggle:hover,
-body:not(.wallpaper-full) #backgroundToggle:focus-visible {
-  opacity: var(--control-opacity);
+body:not(.wallpaper-full) #backgroundToggle:focus-visible,
+body:not(.wallpaper-full) #pageRefresh:hover,
+body:not(.wallpaper-full) #pageRefresh:focus-visible {
+  opacity: 1;
 }
 
 .opacity-panel {
@@ -588,7 +593,8 @@ body.wallpaper-full.interaction-locked #wallpaperMode {
 
 body.wallpaper-full #interactionLock,
 body.wallpaper-full #wallpaperMode,
-body.wallpaper-full #backgroundToggle {
+body.wallpaper-full #backgroundToggle,
+body.wallpaper-full #pageRefresh {
   opacity: calc(.5 * var(--control-opacity));
 }
 
@@ -597,8 +603,21 @@ body.wallpaper-full #interactionLock:focus-visible,
 body.wallpaper-full #wallpaperMode:hover,
 body.wallpaper-full #wallpaperMode:focus-visible,
 body.wallpaper-full #backgroundToggle:hover,
-body.wallpaper-full #backgroundToggle:focus-visible {
-  opacity: var(--control-opacity);
+body.wallpaper-full #backgroundToggle:focus-visible,
+body.wallpaper-full #pageRefresh:hover,
+body.wallpaper-full #pageRefresh:focus-visible {
+  opacity: 1;
+}
+
+body.wallpaper-semi #interactionLock:hover,
+body.wallpaper-semi #interactionLock:focus-visible,
+body.wallpaper-semi #wallpaperMode:hover,
+body.wallpaper-semi #wallpaperMode:focus-visible,
+body.wallpaper-semi #backgroundToggle:hover,
+body.wallpaper-semi #backgroundToggle:focus-visible,
+body.wallpaper-semi #pageRefresh:hover,
+body.wallpaper-semi #pageRefresh:focus-visible {
+  opacity: 1;
 }
 
 .wallpaper-mode {
