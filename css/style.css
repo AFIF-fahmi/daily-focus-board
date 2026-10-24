@@ -509,6 +509,8 @@ body.wallpaper-full #pageRefresh,
 body.wallpaper-full #minimizedWindows { opacity: var(--control-opacity); }
 
 body:not(.wallpaper-full) #workspace .window-card { opacity: var(--window-opacity); }
+body:not(.wallpaper-full) #workspace .window-card:hover,
+body:not(.wallpaper-full) #workspace .window-card:focus-within { opacity: 1; }
 body:not(.wallpaper-full) #connectionStatus { opacity: var(--window-opacity); }
 body:not(.wallpaper-full) header { opacity: var(--greeting-opacity); }
 body:not(.wallpaper-full) #interactionLock,

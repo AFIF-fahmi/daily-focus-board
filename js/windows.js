@@ -12,16 +12,21 @@
   }
 
   function saveLayout(cards) {
-    const layout = {};
+    const layout = readLayout();
     cards.forEach(card => {
-      if (card.classList.contains("is-minimized")) return;
-      layout[card.dataset.window] = {
-        left: card.offsetLeft,
-        top: card.offsetTop,
-        width: card.offsetWidth,
-        height: card.offsetHeight,
-        z: Number(card.style.zIndex) || 1,
-      };
+      const windowName = card.dataset.window;
+      if (card.classList.contains("is-minimized")) {
+        layout[windowName] = { ...(layout[windowName] || {}), minimized: true };
+      } else {
+        layout[windowName] = {
+          left: card.offsetLeft,
+          top: card.offsetTop,
+          width: card.offsetWidth,
+          height: card.offsetHeight,
+          z: Number(card.style.zIndex) || 1,
+          minimized: false,
+        };
+      }
     });
     localStorage.setItem(layoutKey, JSON.stringify(layout));
   }
@@ -77,6 +82,27 @@
     addResizeHandles(card);
     applyLayout(card, layout[windowName], index);
 
+    const minimizeCard = () => {
+      if (card.classList.contains("is-minimized")) return;
+      card.classList.add("is-minimized");
+      const icon = document.createElement("button");
+      icon.className = "minimized-icon";
+      icon.type = "button";
+      icon.dataset.window = windowName;
+      icon.textContent = icons[windowName] || "□";
+      icon.title = `Tampilkan ${title}`;
+      icon.setAttribute("aria-label", `Tampilkan ${title}`);
+      icon.onclick = () => {
+        if (locked()) return;
+        card.classList.remove("is-minimized");
+        icon.remove();
+        bringToFront(card);
+        saveLayout([...document.querySelectorAll(".window-card")]);
+      };
+      minimizedWindows.appendChild(icon);
+      saveLayout([...document.querySelectorAll(".window-card")]);
+    };
+
     tools.querySelector(".window-add")?.addEventListener("click", event => {
       event.stopPropagation();
       if (!locked()) window.quickAdd(windowName);
@@ -92,22 +118,7 @@
     tools.querySelector(".window-minimize").onclick = event => {
       event.stopPropagation();
       if (locked()) return;
-      card.classList.add("is-minimized");
-      const icon = document.createElement("button");
-      icon.className = "minimized-icon";
-      icon.type = "button";
-      icon.dataset.window = windowName;
-      icon.textContent = icons[windowName] || "□";
-      icon.title = `Tampilkan ${title}`;
-      icon.setAttribute("aria-label", `Tampilkan ${title}`);
-      icon.onclick = () => {
-        if (locked()) return;
-        card.classList.remove("is-minimized");
-        icon.remove();
-        bringToFront(card);
-      };
-      minimizedWindows.appendChild(icon);
-      saveLayout([...document.querySelectorAll(".window-card")]);
+      minimizeCard();
     };
 
     card.addEventListener("pointerdown", () => bringToFront(card));
@@ -176,6 +187,8 @@
         window.addEventListener("pointerup", stop, { once: true });
       });
     });
+
+    return { minimizeCard };
   }
 
   window.setupWindows = function setupWindows() {
@@ -183,9 +196,12 @@
     const minimizedWindows = document.getElementById("minimizedWindows");
     const cards = [...workspace.querySelectorAll(".window-card")];
     const layout = readLayout();
-    cards.forEach((card, index) => setupCard(card, minimizedWindows, layout, index));
+    const controls = cards.map((card, index) => setupCard(card, minimizedWindows, layout, index));
     const pomo = cards.find(card => card.dataset.window === "pomo");
-    if (pomo) pomo.querySelector(".window-minimize").click();
+    cards.forEach((card, index) => {
+      const savedState = layout[card.dataset.window];
+      if (savedState?.minimized || (card === pomo && savedState?.minimized !== false)) controls[index].minimizeCard();
+    });
     topZ = Math.max(...cards.map(card => Number(card.style.zIndex) || 1), 10);
     document.getElementById("resetLayout").onclick = () => {
       if (locked()) return;
