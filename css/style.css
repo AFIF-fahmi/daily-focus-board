@@ -179,7 +179,7 @@ h2 {
   margin-bottom: 1.4vh;
 }
 
-.scroll { overflow-y: auto; flex: 1; }
+.scroll { overflow-y: auto; flex: 1; min-height: 0; }
 .scroll::-webkit-scrollbar { width: 0; }
 
 #clock {
